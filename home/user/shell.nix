@@ -4,6 +4,7 @@ let
     docker-compose = "podman-compose";
     cat = "bat";
     ls = "eza --icons=always";
+    zen = "MOZ_ENABLE_WAYLAND=0 zen";
 
     fullClean = '' 
         nix-collect-garbage --delete-old

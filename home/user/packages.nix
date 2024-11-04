@@ -1,8 +1,6 @@
-{ pkgs, pkgs-unstable, ... }:
+{ pkgs, pkgs-unstable, zenbrowser, ... }:
 
 {
-  
-
   home.packages = [
 
     # Dev stuff
@@ -18,21 +16,15 @@
     
     # Work stuff
     pkgs.obsidian
-    pkgs.thunderbird
  
     # Social
     pkgs.telegram-desktop
+    
+    zenbrowser
 
     # Gaming
     pkgs.steam
     pkgs.steam-run
-    pkgs.yuzu-mainline
-    (pkgs.lutris.override {
-      extraPkgs = pkgs: [
-        pkgs.wineWowPackages.stable
-        pkgs.winetricks
-      ];
-    })
 
     # Downloads
     pkgs.qbittorrent
