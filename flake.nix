@@ -12,7 +12,7 @@
             inputs.nixpkgs.follows = "nixpkgs";
         };
 
-        zen-browser.url = "github:MarceColl/zen-browser-flake";
+        zen-browser.url = "github:idrevnii/zen-browser-flake";
     };
 
     outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, zen-browser, ... }@inputs:

@@ -120,15 +120,15 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1727721329,
-        "narHash": "sha256-QYlWZwUSwrM7BuO+dXclZIwoPvBIuJr6GpFKv9XKFPI=",
-        "owner": "MarceColl",
+        "lastModified": 1730764662,
+        "narHash": "sha256-84/Q6G+DFEcSfTX5kFXs+/yz0CtP1mvVhYv0ZTOe0So=",
+        "owner": "idrevnii",
         "repo": "zen-browser-flake",
-        "rev": "e6ab73f405e9a2896cce5956c549a9cc359e5fcc",
+        "rev": "34538a3a7418c659a467c83fea09671f90dfb3a8",
         "type": "github"
       },
       "original": {
-        "owner": "MarceColl",
+        "owner": "idrevnii",
         "repo": "zen-browser-flake",
         "type": "github"
       }
