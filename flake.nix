@@ -1,49 +1,41 @@
 {
-    description = "anc13nt NixOS";
+  description = "Snowflake configuration with VFIO for double VGA setup with windows vm";
 
-    inputs = {
-	    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
-        nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
-        home-manager.url = "github:nix-community/home-manager/release-23.11";
-        home-manager.inputs.nixpkgs.follows = "nixpkgs";
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
 
-        firefox-addons = {
-            url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
-
-        zen-browser.url = "github:idrevnii/zen-browser-flake";
+    home-manager = {
+      url = "github:nix-community/home-manager/release-25.05";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, zen-browser, ... }@inputs:
-	let 
-	    lib = nixpkgs.lib;
-	    system = "x86_64-linux";
-	    pkgs = nixpkgs.legacyPackages.${system};
-        pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
-        zenbrowser = zen-browser.packages.${system}.specific;
-	in
-    {
-		nixosConfigurations.titanium = lib.nixosSystem {
-                inherit system;
-				modules = [
-                    ./system/configuration.nix 
-				];
-                specialArgs = {
-                    inherit pkgs-unstable;
-                };
-        };
-
-		homeConfigurations = {
-			anc13nt = home-manager.lib.homeManagerConfiguration {
-				inherit pkgs;
-				modules = [ ./home ];
-                extraSpecialArgs = {
-                    inherit pkgs-unstable;
-                    inherit inputs;
-                    inherit zenbrowser;
-                };
-			};
-		};
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
+    
+    nix-colors.url = "github:misterio77/nix-colors";
+  };
+
+  outputs = { self, nixpkgs, home-manager, hyprland, ... }@inputs: {
+    nixosConfigurations.plutonium = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      
+      specialArgs = { inherit inputs; };
+
+      modules = [
+        ./nixos/configuration.nix
+
+        home-manager.nixosModules.home-manager
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            extraSpecialArgs = { inherit inputs; }; 
+            users.anc13nt = import ./home/home.nix;
+          };
+        }
+      ];
+    };
+  };
 }
