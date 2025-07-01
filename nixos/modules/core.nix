@@ -13,6 +13,8 @@
   networking.hostName = "plutonium";
   networking.networkmanager.enable = true;
 
+  hardware.enableRedistributableFirmware = true;
+
   time.timeZone = "Europe/Moscow";
 
   i18n.defaultLocale = "en_US.UTF-8";
@@ -64,7 +66,7 @@
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
 
-  environment.systemPackages = with pkgs; [ wget vim ];
+  environment.systemPackages = with pkgs; [ wget neovim ];
   
   system.stateVersion = "25.05";
 }
